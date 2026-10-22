@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from decimal import ROUND_HALF_EVEN, Decimal, InvalidOperation
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 
 ZERO = Decimal("0.00")
 CENT = Decimal("0.01")
@@ -21,7 +21,7 @@ def parse_amount(text: str) -> Decimal:
 
 def quantize_cents(value: Decimal) -> Decimal:
     """Round a value to whole cents using the statement rule (half up)."""
-    return value.quantize(CENT, rounding=ROUND_HALF_EVEN)
+    return value.quantize(CENT, rounding=ROUND_HALF_UP)
 
 
 def format_amount(value: Decimal) -> str:
