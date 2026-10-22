@@ -32,8 +32,6 @@ class Ledger:
     def balance_as_of(self, day: date) -> Decimal:
         """Balance after every transaction dated on or before `day`."""
         count = bisect.bisect_right(self._dates, day)
-        if count == 0:
-            return self._running[-1]
         return self._running[count]
 
     def between(self, start: date, end: date) -> list[Transaction]:
