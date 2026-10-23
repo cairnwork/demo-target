@@ -22,7 +22,7 @@ class Transaction:
 
 
 def parse_csv(text: str) -> list[Transaction]:
-    reader = csv.reader(io.StringIO(text))
+    reader = csv.reader(io.StringIO(text.removeprefix("\ufeff")))
     header = next(reader, None)
     if header is None:
         return []
