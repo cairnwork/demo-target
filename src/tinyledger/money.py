@@ -14,9 +14,12 @@ def parse_amount(text: str) -> Decimal:
     if not cleaned:
         raise ValueError("empty amount")
     try:
-        return Decimal(cleaned)
+        value = Decimal(cleaned)
     except InvalidOperation as exc:
         raise ValueError(f"invalid amount: {text!r}") from exc
+    if not value.is_finite():
+        raise ValueError(f"invalid amount: {text!r}")
+    return value
 
 
 def quantize_cents(value: Decimal) -> Decimal:
